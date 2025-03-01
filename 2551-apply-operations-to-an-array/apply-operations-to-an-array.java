@@ -7,14 +7,16 @@ class Solution {
                 nums[i+1]=0;
             }
         }
-        int arr[]=new int[n];
         int j=0;
-        for(int i=0;i<n;i++){
-            if(nums[i]!=0){
-                arr[j]=nums[i];
-                j++;
+        for(int num:nums){
+            if(num!=0){
+                nums[j++]=num;
             }
         }
-        return arr;
+
+        while(j<n){
+            nums[j++]=0;
+        }
+        return nums;
     }
 }
