@@ -4,7 +4,7 @@ class Solution {
         int low=0;
         int mid=0;
         int high=n-1;
-        for(int i=0;i<n;i++){
+        while(mid<=high){
             if(nums[mid]==0){
                 swap(nums,mid,low);
                 low++;
