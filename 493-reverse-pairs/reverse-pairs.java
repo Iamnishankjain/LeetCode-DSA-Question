@@ -1,12 +1,12 @@
 class Solution {
-    static int count;
     public int reversePairs(int[] nums) {
-        count=0;
-        sort(nums,0,nums.length-1);
+        int count=0;
+        count+=sort(nums,0,nums.length-1);
         return count;
     }
-    public static void countpair(int []arr,int low,int mid,int high)
+    public static int countpair(int []arr,int low,int mid,int high)
     {
+        int count=0;
         int right=mid+1;
         for(int i=low;i<=mid;i++){
             while(right<=high && (long)arr[i]>2L*arr[right]){
@@ -14,15 +14,18 @@ class Solution {
             }
             count+=(right-(mid+1));
         }
+        return count;
     }
-    public static void sort(int []arr,int p,int q){
+    public static int sort(int []arr,int p,int q){
+        int count=0;
         if(p<q){
             int mid=p+(q-p)/2;
-            sort(arr,p,mid);
-            sort(arr,mid+1,q);
-            countpair(arr,p,mid,q);
+            count+=sort(arr,p,mid);
+            count+=sort(arr,mid+1,q);
+            count+=countpair(arr,p,mid,q);
             merge(arr,p,mid,q);
         }
+        return count;
     }
 
     public static void merge(int []arr,int p,int mid,int q){
