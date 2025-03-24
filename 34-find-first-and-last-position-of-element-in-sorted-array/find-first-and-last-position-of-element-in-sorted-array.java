@@ -1,47 +1,41 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        int arr[]=new int[2];
-        arr[0]=first(nums,target);
-        arr[1]=last(nums,target);
-        return arr;
+        int f=first(nums,nums.length,target);
+        if(f==nums.length || nums[f]!=target) return new int[]{-1,-1};
+        int l=last(nums,nums.length,target);
+        return new int[]{f,l-1};
     }
 
-    public int first(int nums[],int target){
-        int first=-1;
-        int left=0;
-        int right=nums.length-1;
-        while(left<=right){
-            int mid=left+(right-left)/2;
-            if(nums[mid]<target){
-                left=mid+1;
+   public static int first(int []arr, int n, int x) {
+        int ans=n;
+        int lb=0;
+        int ub=n-1;
+        while(lb<=ub){
+            int mid=lb+((ub-lb)/2);
+            if(arr[mid]>=x){
+                ans=mid;
+                ub=mid-1;
             }
             else{
-                right=mid-1;
-            }
-            if(nums[mid]==target){
-                first = mid;
+                lb=mid+1;
             }
         }
-        return first;
+        return ans;
     }
-
-
-    public int last(int nums[],int target){
-        int last=-1;
-        int left=0;
-        int right=nums.length-1;
-        while(left<=right){
-            int mid=left+(right-left)/2;
-            if(nums[mid]<=target){
-                left=mid+1;
+    public static int last(int []arr, int n, int x){
+        int ans=n;
+        int lb=0;
+        int ub=n-1;
+        while(lb<=ub){
+            int mid=lb+((ub-lb)/2);
+            if(arr[mid]>x){
+                ans=mid;
+                ub=mid-1;
             }
             else{
-                right=mid-1;
-            }
-            if(nums[mid]==target){
-                last = mid;
+                lb=mid+1;
             }
         }
-        return last;
+        return ans;
     }
 }
