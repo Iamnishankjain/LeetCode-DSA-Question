@@ -11,8 +11,8 @@ class Solution {
             if(nums[mid]==nums[lb] && nums[lb]==nums[ub]){
                 lb++;
                 ub--;
+                continue;
             }
-            else
             if(nums[lb]<=nums[mid]){
                 if(nums[lb]<=target && nums[mid]>=target){
                     ub=mid-1;
