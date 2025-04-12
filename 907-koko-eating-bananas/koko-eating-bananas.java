@@ -1,9 +1,8 @@
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
-        Arrays.sort(piles);
         int n=piles.length;
         int low=1;
-        int high=piles[n-1];
+        int high=max(piles);
         int ans=-1;
         while(low<=high){
             int mid=low+(high-low)/2;
@@ -27,5 +26,13 @@ class Solution {
             return true;
         }
         return false;
+    }
+
+    public int max(int arr[]){
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<arr.length;i++){
+            if(max<arr[i]) max=arr[i];
+        }
+        return max;
     }
 }
