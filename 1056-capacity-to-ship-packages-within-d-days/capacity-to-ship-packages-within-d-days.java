@@ -2,7 +2,6 @@ class Solution {
     public int shipWithinDays(int[] weights, int days) {
         int low=Arrays.stream(weights).max().getAsInt();
         int high=Arrays.stream(weights).sum();
-        int ans=-1;
         while(low<=high){
             int cap=low+(high-low)/2;
             int gDays=getDays(weights,cap);
