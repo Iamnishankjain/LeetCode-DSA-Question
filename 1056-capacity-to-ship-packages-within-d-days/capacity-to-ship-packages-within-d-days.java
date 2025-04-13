@@ -7,14 +7,14 @@ class Solution {
             int cap=low+(high-low)/2;
             int gDays=getDays(weights,cap);
             if(gDays<=days){
-                ans=cap;
+                
                 high=cap-1;
             }
             else{
                 low=cap+1;
             }
         }
-        return ans;
+        return low;
     }
 
     public int getDays(int[] weights,int cap){
