@@ -1,21 +1,42 @@
 class Solution {
-    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int n=nums1.length+nums2.length;
-        int arr[]=new int[n];
-        int c=0;
-        for(int i=0;i<nums1.length;i++){
-            arr[c++]=nums1[i];
+    public double findMedianSortedArrays(int[] a, int[] b) {
+        int n1=a.length;
+        int n2=b.length;
+        int n=n1+n2;
+        int i=0,j=0;
+        int cnt=0;
+        int ind2=n/2, ind1=ind2-1;
+        int ele1=-1, ele2=-1;
+        while(i<n1 && j<n2){
+            if(a[i]<b[j]){
+                if(cnt==ind1) ele1=a[i];
+                if(cnt==ind2) ele2=a[i];
+                cnt++;
+                i++;
+            }
+            else{
+                if(cnt==ind1) ele1=b[j];
+                if(cnt==ind2) ele2=b[j];
+                cnt++;
+                j++;
+            }
         }
-        for(int i=0;i<nums2.length;i++){
-            arr[c++]=nums2[i];
+        while(i<n1){
+            if(cnt==ind1) ele1=a[i];
+            if(cnt==ind2) ele2=a[i];
+            cnt++;
+            i++;
         }
-        Arrays.sort(arr);
-        if(n%2!=0){
-            return (double)(arr[n/2]);
+        while(j<n2){
+            if(cnt==ind1) ele1=b[j];
+            if(cnt==ind2) ele2=b[j];
+            cnt++;
+            j++;
         }
-        double mid1=(double)arr[n/2];
-        double mid2=(double)arr[(n/2)-1];
-        double result = (mid1+mid2)/2.0;
-        return result;
+
+        if(n%2!=1){
+            return (ele2+ele1)/2.0;
+        }
+        return (double) ele2;
     }
 }
