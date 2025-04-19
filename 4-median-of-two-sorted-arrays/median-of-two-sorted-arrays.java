@@ -3,40 +3,36 @@ class Solution {
         int n1=a.length;
         int n2=b.length;
         int n=n1+n2;
-        int i=0,j=0;
-        int cnt=0;
-        int ind2=n/2, ind1=ind2-1;
-        int ele1=-1, ele2=-1;
-        while(i<n1 && j<n2){
-            if(a[i]<b[j]){
-                if(cnt==ind1) ele1=a[i];
-                if(cnt==ind2) ele2=a[i];
-                cnt++;
-                i++;
+        int left=(n1+n2+1)/2; 
+        if(n1>n2){
+            return findMedianSortedArrays(b,a);
+        }
+        int low=0, high=n1;;
+        while(low<=high){
+            int mid1=(low+high)/2;
+            int mid2=left-mid1; 
+            int l1=Integer.MIN_VALUE,l2=Integer.MIN_VALUE;
+            int r1=Integer.MAX_VALUE,r2=Integer.MAX_VALUE;
+            if(mid1<n1) r1=a[mid1];
+            if(mid2<n2) r2=b[mid2];
+            if(mid1-1>=0) l1=a[mid1-1];
+            if(mid2-1>=0) l2=b[mid2-1];
+
+            if(l1<=r2 && l2<=r1){
+                if(n%2==1){
+                    return Math.max(l1,l2);
+                }
+                else{
+                    return (Math.max(l1,l2)+Math.min(r1,r2))/2.0;
+                }
+            }
+            else if(l1>r2){
+                high=mid1-1;
             }
             else{
-                if(cnt==ind1) ele1=b[j];
-                if(cnt==ind2) ele2=b[j];
-                cnt++;
-                j++;
+                low=mid1+1;
             }
         }
-        while(i<n1){
-            if(cnt==ind1) ele1=a[i];
-            if(cnt==ind2) ele2=a[i];
-            cnt++;
-            i++;
-        }
-        while(j<n2){
-            if(cnt==ind1) ele1=b[j];
-            if(cnt==ind2) ele2=b[j];
-            cnt++;
-            j++;
-        }
-
-        if(n%2!=1){
-            return (ele2+ele1)/2.0;
-        }
-        return (double) ele2;
+        return -1;
     }
 }
