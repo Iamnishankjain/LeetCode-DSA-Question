@@ -1,17 +1,22 @@
 class Solution {
+    public int getVal(char ch){
+
+        switch(ch){
+            case 'I': return 1;
+            case 'V': return 5;
+            case 'X': return 10;
+            case 'L': return 50;
+            case 'C': return 100;
+            case 'D': return 500;
+            case 'M': return 1000;
+        }
+        return '.';
+    }
     public int romanToInt(String s) {
-        HashMap<Character,Integer> map=new HashMap<>();
-        map.put('I',1);
-        map.put('V',5);
-        map.put('X',10);
-        map.put('L',50);
-        map.put('C',100);
-        map.put('D',500);
-        map.put('M',1000);
         int num=0;
         for(int i=0;i<s.length()-1;i++){
-            int prev=map.get(s.charAt(i));
-            int next=map.get(s.charAt(i+1));
+            int prev=getVal(s.charAt(i));
+            int next=getVal(s.charAt(i+1));
             if(prev>=next){
                 num+=prev;
             }
@@ -19,7 +24,7 @@ class Solution {
                 num-=prev;
             }
         }
-        num+=map.get(s.charAt(s.length()-1));
+        num+=getVal(s.charAt(s.length()-1));
         return num;
     }
 }
