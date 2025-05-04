@@ -10,7 +10,6 @@ class Solution {
             }
             i++;
         }
-        if (i >= s.length() || !Character.isDigit(s.charAt(i))) return 0;
         return atoid(s,0,i,s.length(),sign);
     }
     public int atoid(String s,int num,int i,int n,int sign){
