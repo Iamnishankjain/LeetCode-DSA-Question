@@ -1,31 +1,17 @@
 class Solution {
     public List<String> generateParenthesis(int n) {
         List<String> list=new ArrayList<>();
-        generate(list,"",n);
+        generate(list,"",n,0,0);
         return list;
     }
-    public void generate(List<String> list,String s,int n){
+    public void generate(List<String> list,String s,int n,int open,int close){
         if(n*2==s.length()){
-            if(valid(s))
-                list.add(s);
+            list.add(s);
             return;
         }
-        generate(list,s+"(",n);
-        generate(list,s+")",n);
-    }
-    public boolean valid(String str){
-        Stack<Character> stack=new Stack<>();
-        for(int i=0;i<str.length();i++){
-            if(str.charAt(i)=='('){
-                stack.push('(');
-            }
-            else if(str.charAt(i)==')' && stack.isEmpty()){
-                return false;
-            }
-            else{
-                stack.pop();
-            }
-        }
-        return stack.isEmpty();
+        if(open<n)
+        generate(list,s+"(",n,open+1,close);
+        if(close<open)
+        generate(list,s+")",n,open,close+1);
     }
 }
