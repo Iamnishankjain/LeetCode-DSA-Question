@@ -8,7 +8,6 @@ class Solution {
     public void valid(List<String> list,String s,int n,int flag){
         if(s.length()==n){
             list.add(s);
-            s="";
             return;
         }
         if(flag!=0)
