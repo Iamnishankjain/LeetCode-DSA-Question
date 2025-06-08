@@ -6,10 +6,9 @@ class Solution {
     }
 
     public void combine(int ind,int sum,List<Integer> list,int target,int[] arr,int n,List<List<Integer>> res){
-        if (sum > target) return;
-        if(ind==n){
-            if(sum==target)
-                res.add(new ArrayList<>(list));
+        if (sum > target || ind==n) return;
+        if(sum==target){
+            res.add(new ArrayList<>(list));
             return;
         }
 
