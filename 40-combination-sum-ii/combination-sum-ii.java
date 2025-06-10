@@ -16,11 +16,12 @@ class Solution {
             return;
         }
         for(int i=ind;i<n;i++){
-            if(i>ind && arr[i]==arr[i-1]) continue;
             if(arr[i]>target) break;
-            ans.add(arr[i]);
-            getSubset(i+1,target-arr[i],ans,arr,n,res);
-            ans.remove(ans.size()-1);
+            if(i==ind || arr[i]!=arr[i-1]){
+                ans.add(arr[i]);
+                getSubset(i+1,target-arr[i],ans,arr,n,res);
+                ans.remove(ans.size()-1);
+            }
         }
     }
 }
