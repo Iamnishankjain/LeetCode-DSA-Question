@@ -1,25 +1,22 @@
 class Solution {
-    public double myPow(double x, int n) {
-        long nn=n;
-        if (nn < 0) {
-            nn = -nn;
-            return 1.0 / recursive(x, nn);
-        } else {
-            return recursive(x, nn);
+    public double myPow(double x, int pow) {
+        long n=pow;
+        double ans=1;
+        int sign= n>=0 ? 1 : -1;
+        if(n<0){
+            n=-n;
         }
-    }
-
-    public double recursive(double x, long n){
-        if(n==0){
-            return 1.0;
+        while(n>0){
+            if(n%2==1){
+                ans*=x;
+                n=n-1;
+            }
+            else{
+                n=n/2;
+                x=x*x;
+            }
         }
-
-        double half = recursive(x, n / 2);
-
-        if (n % 2 == 0) {
-            return half * half;
-        } else {
-            return half * half * x;
-        }
+        
+        return sign==1 ? ans : (1.0/ans);
     }
 }
