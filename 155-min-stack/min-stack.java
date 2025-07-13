@@ -4,7 +4,7 @@ class MinStack {
     long min=0;
     public void push(int val) {
         if(s.isEmpty()){
-            min=val;
+            min=(long)val;
             s.push((long)val);
         }
         else{
