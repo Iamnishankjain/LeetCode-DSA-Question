@@ -1,28 +1,38 @@
-import java.util.AbstractMap;
 class MinStack {
 
-    Stack<Map.Entry<Integer,Integer>> s=new Stack<>();
-    
+    Stack<Long> s=new Stack<>();
+    long min=0;
     public void push(int val) {
-        int key=val;
-        if(!s.isEmpty()){
-            if(key>s.peek().getValue()){
-                key=s.peek().getValue();
+        if(s.isEmpty()){
+            min=val;
+            s.push((long)val);
+        }
+        else{
+            if(min<=val) s.push((long)val);
+            else{
+                s.push(2*(long)val-min);
+                min=(long)val;
             }
         }
-        s.push(new AbstractMap.SimpleEntry<>(val, key));
     }
     
     public void pop() {
-        s.pop();
+        if(s.size()==0) return;
+        long x=s.pop();
+        if(x<min){
+            min=2*min-x;
+        }
     }
     
     public int top() {
-        return s.peek().getKey();
+        if(s.size()==0) return -1;
+        long x=s.peek();
+        if(min<x) return (int)x;
+        else return (int)min;
     }
     
     public int getMin() {
-        return s.peek().getValue();
+        return (int)min;
     }
 }
 
