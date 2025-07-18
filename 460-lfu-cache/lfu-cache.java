@@ -1,16 +1,5 @@
 class LFUCache {
 
-    static class Node{
-        int data,key,freq;
-        Node next,prev;
-        Node(int key,int data){
-            this.key=key;
-            this.data=data;
-            next=null;
-            prev=null;
-            freq=1;
-        }
-    }
     static HashMap<Integer, Integer> cache;
     static HashMap<Integer, Integer> keyCount;
     static HashMap<Integer, LinkedHashSet<Integer>> freqMap;
