@@ -29,10 +29,11 @@ class Solution {
         q.offer(new Pair(root,0));
         while(!q.isEmpty()){
             int level=q.size();
+            int minInd=q.peek().ind;
             int first=0,last=0;
             for(int i=0;i<level;i++){
                 Pair pair=q.poll();
-                int currInd=pair.ind-1;
+                int currInd=pair.ind-minInd;
                 TreeNode node=pair.node;
                 if(i==0) first=currInd;
                 if(i==level-1) last=currInd;
