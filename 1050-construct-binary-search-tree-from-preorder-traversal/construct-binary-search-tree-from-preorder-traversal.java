@@ -15,23 +15,28 @@
  */
 class Solution {
     public TreeNode bstFromPreorder(int[] preorder) {
-        TreeNode root=null;
-        for(int i=0;i<preorder.length;i++){
-            root=bst(root,preorder[i]);
-        }
-        return root;
-    }
-
-    public TreeNode bst(TreeNode root, int val){
-        if(root==null){
-            return new TreeNode(val);
-        }
-
-        if(root.val<val){
-            root.right=bst(root.right,val);
-        }
-        if(root.val>val){
-            root.left=bst(root.left,val);
+        if(preorder.length==0) return null;
+        int i=0;
+        TreeNode root=new TreeNode(preorder[i++]);
+        
+        while(i<preorder.length){
+            TreeNode curr=root;
+            TreeNode newNode=new TreeNode(preorder[i]);;
+            while(true){
+                if(curr.val>preorder[i]){
+                    if(curr.left==null) {
+                        curr.left=newNode;
+                        break;
+                    }
+                else curr=curr.left;
+            }else if(curr.val<preorder[i]){
+                if(curr.right==null) {
+                    curr.right=newNode;
+                    break;
+                }
+                else curr=curr.right;
+            }
+            }i++;
         }
         return root;
     }
