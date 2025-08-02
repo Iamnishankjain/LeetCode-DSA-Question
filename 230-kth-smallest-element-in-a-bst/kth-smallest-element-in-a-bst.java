@@ -22,11 +22,11 @@ class Solution {
     public int get(TreeNode root,int k,int[] c){
         if(root==null) return -1;
         int l=get(root.left,k,c);
-        
+        if(l!=-1) return l;
         c[0]++;
         if(c[0]==k) return root.val;
         int r=get(root.right,k,c);
         
-        return l==-1 ? r : l;
+        return r;
     }
 }
