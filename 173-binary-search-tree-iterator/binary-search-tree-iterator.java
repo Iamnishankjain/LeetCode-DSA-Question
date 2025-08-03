@@ -27,12 +27,9 @@ class BSTIterator {
         if(s.isEmpty()) return -1;
         TreeNode top=s.pop();
         TreeNode right=top.right;
-        if(right!=null){
+        while(right!=null){
             s.push(right);
-            while(right.left!=null){
-                s.push(right.left);
-                right=right.left;
-            } 
+            right=right.left;
         }
         return top.val;
     }
