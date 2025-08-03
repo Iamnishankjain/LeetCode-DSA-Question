@@ -16,15 +16,12 @@
 class Solution {
     private TreeNode first=null;
     private TreeNode second=null;
-    private TreeNode mid=null;
     private TreeNode prev=null;
     public void recoverTree(TreeNode root) {
         if(root==null) return;
         fix(root);
         if(first!=null && second!=null){
             swap(first,second);
-        }else{
-            swap(first,mid);
         }
     }
 
@@ -34,10 +31,8 @@ class Solution {
         if(prev!=null && prev.val>root.val){
             if(first==null){
                 first=prev;
-                mid=root;
-            }else{
-                second=root;
             }
+            second=root;
         }
         prev=root;
         fix(root.right);
