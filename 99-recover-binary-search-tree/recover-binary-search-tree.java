@@ -17,19 +17,14 @@ class Solution {
     private TreeNode first=null;
     private TreeNode second=null;
     private TreeNode mid=null;
-    private TreeNode prev;
+    private TreeNode prev=null;
     public void recoverTree(TreeNode root) {
         if(root==null) return;
-        prev=new TreeNode(Integer.MIN_VALUE);
         fix(root);
         if(first!=null && second!=null){
-            int t=first.val;
-            first.val=second.val;
-            second.val=t;
+            swap(first,second);
         }else{
-            int t=first.val;
-            first.val=mid.val;
-            mid.val=t;
+            swap(first,mid);
         }
     }
 
@@ -47,4 +42,9 @@ class Solution {
         prev=root;
         fix(root.right);
     }
+    public void swap(TreeNode a, TreeNode b) {
+    int temp = a.val;
+    a.val = b.val;
+    b.val = temp;
+}
 }
