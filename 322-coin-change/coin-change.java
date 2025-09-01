@@ -1,25 +1,27 @@
 class Solution {
     public int coinChange(int[] coins, int amount) {
         int n=coins.length;
-        int memo[][]=new int[n][amount+1];
-        for(int i=0;i<n;i++){
-            Arrays.fill(memo[i],-1);
+        int dp[][]=new int[n][amount+1];
+
+        for(int j=0;j<=amount;j++){
+            if(j%coins[0]==0){
+                dp[0][j]=j/coins[0];
+            }else{
+                dp[0][j]=(int)1e9;
+            }
         }
-        int ans= get(n-1,coins,amount,memo);
+
+        for(int i=1;i<n;i++){
+            for(int j=0;j<=amount;j++){
+                int notTake=dp[i-1][j];
+                int take=Integer.MAX_VALUE;
+                if(coins[i]<=j){
+                    take=1+dp[i][j-coins[i]];
+                }
+                dp[i][j]= Math.min(take,notTake);
+            }
+        }
+        int ans= dp[n-1][amount];
         return ans>=(int)1e9 ? -1 : ans;
-    }
-    public int get(int n,int coins[],int amount,int memo[][]){
-        if(n==0){
-            if(amount%coins[0]==0) return amount/coins[0];
-            return (int)1e9;
-        }
-        if(memo[n][amount]!=-1) return memo[n][amount];
-        int notTake=get(n-1,coins,amount,memo);
-        int take=Integer.MAX_VALUE;
-        if(coins[n]<=amount){
-            take=1+get(n,coins,amount-coins[n],memo);
-        }
-        memo[n][amount]= Math.min(take,notTake);
-        return memo[n][amount];
     }
 }
